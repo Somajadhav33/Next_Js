@@ -1,0 +1,52 @@
+production ready react framework developed by vercel
+
+serverside rendring
+file based routing
+builtin performance optimizations
+
+
+Router ,app router,page router
+
+router - manages how users move between pages in app
+file based routing
+
+types of router -- 1.   page router - older way
+                    2 app router - latest approach
+
+                    Project Structure and organization -
+                    folders and file convertions 
+
+nextjs uses file based routing
+layput.tsx file -
+common special files
+
+routes - 
+1. static routes - /about , /contact
+2. dynamic routes - /user/[id]/page.tsx
+3. Catch all routes = /docs/[.]
+4. route groups() - 
+5. parallel routes  -
+6. intercepting routes
+
+dynamic routing
+
+catch all segment - 
+
+route groups and private folders
+intercepting & parallel routes
+
+unmatched routes
+
+server and client side components
+backend route  handlers
+reserved file conversions
+
+GET, POST , PUT/PATCH, DELETE
+
+Dynamic route handlers 
+query parameters, - filtering , searching pagination
+http headers - metadata(send with every http request and response)  - 1. request header(carry info about incomming request) 2. response header
+
+cookies - 
+
+lean()
