@@ -1,0 +1,21 @@
+import mongoose from "mongoose";
+const MONGODB_URL = process.env.MONGODB_URL;
+
+let is_connected = true;
+
+async function dbConnect() {
+  if (is_connected) {
+    return console.log("Mongo is already connected!!");
+
+  }
+  try {
+    const db = await mongoose.connect(MONGODB_URL);
+    is_connected = db.connections[0].readyState === 1;
+    console.log("Connected to MongoDb", db);
+  } catch (error) {
+    console.log("Failed to connect");
+    throw error;
+  }
+}
+
+export default dbConnect;
