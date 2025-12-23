@@ -1,30 +1,34 @@
 import dbConnect from "@/lib/db";
 import Note from "@/models/Note";
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 
 export async function PUT(request, { params }) {
   try {
     const { id } = await params;
     await dbConnect();
-    const body = await request.json()
+    const body = await request.json();
 
     const note = await Note.findByIdAndUpdate(
-        id,
-        {...body , updatedAt:new Date()},
-        {new:true , runValidators:true}
-    )    
+      id,
+      { ...body, updatedAt: new Date() },
+      { new: true, runValidators: true }
+    );
 
-        if (!note) {
+    if (!note) {
       return NextResponse.json(
         { success: false, error: "Note not found" },
         { status: 404 }
       );
     }
 
-    return NextResponse.json({success:true ,data:note})
-
+    revalidatePath("/");
+    return NextResponse.json({ success: true, data: note });
   } catch (error) {
-      return NextResponse.json({ success: false, error: error.message }, { status: 400 })
+    return NextResponse.json(
+      { success: false, error: error.message },
+      { status: 400 }
+    );
   }
 }
 
@@ -41,6 +45,7 @@ export async function DELETE(request, { params }) {
       );
     }
 
+    revalidatePath("/");
     return NextResponse.json({ success: true, data: {} });
   } catch (error) {
     return NextResponse.json(
