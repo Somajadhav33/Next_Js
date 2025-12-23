@@ -196,11 +196,33 @@ const NotesClient = ({ initialNotes }) => {
 
                   <p className="text-gray-700 mb-2">{note.content}</p>
                   <p className="text-sm text-gray-500">
-                    Created: {new Date(note.createdAt).toLocaleDateString()}
+                    Created:{" "}
+                    {new Date(note.createdAt)
+                      .toLocaleString("en-GB", {
+                        day: "2-digit",
+                        month: "short",
+                        year: "2-digit",
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        second: "2-digit",
+                        hour12: false,
+                      })
+                      .replace(",", "")}
                   </p>
                   {note.updatedAt !== note.createdAt && (
                     <p className="text-sm text-gray-500">
-                      Updated: {new Date(note.updatedAt).toLocaleDateString()}
+                      Updated:{" "}
+                      {new Date(note.updatedAt)
+                        .toLocaleString("en-GB", {
+                          day: "2-digit",
+                          month: "short",
+                          year: "2-digit",
+                          hour: "2-digit",
+                          minute: "2-digit",
+                          second: "2-digit",
+                          hour12: false,
+                        })
+                        .replace(",", "")}
                     </p>
                   )}
                 </>
