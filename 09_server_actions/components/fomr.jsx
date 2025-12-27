@@ -1,13 +1,15 @@
 "use client";
-import { createUSer } from "@/actions";
+import { createUser } from "@/actions";
 import React from "react";
 import { useFormState } from "react-dom";
 
 const Form = () => {
-  const [state, formAction] = useFormState(createUSer, {});
+
+    const [state , formAction] = useFormState(createUser , {})
+
   return (
     <form action={formAction}>
-      <input type="email" placeholder="user@example.com" />
+      <input name="email" placeholder="user@example.com" />
       <button type="submit">Submit</button>
       {state.error && <p>{state.error}</p>}
     </form>

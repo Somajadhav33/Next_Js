@@ -1,12 +1,21 @@
-import { createUSer } from '@/actions'
+import { createUser } from '@/actions'
 import React from 'react'
 
 const UserForm = () => {
 
+    // async function createUser(fromData) {
+    //     "use server"  // 
+
+    //     const name = fromData.get("name")
+
+    //     console.log("Creating user" , name)
+    // }
+
+
   return (
-    <form action={createUSer}>
-        <input type="text" name="name" placeholder='John Doe'/>
-        <button type="submit">Create</button>
+    <form action={createUser}>
+         <input name="name" placeholder="John Doe" />
+      <button type="submit">Create</button>
     </form>
   )
 }
