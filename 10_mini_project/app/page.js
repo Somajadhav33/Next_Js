@@ -1,11 +1,7 @@
-import dbConnect from "@/lib/db";
-import Image from "next/image";
-
 export default async function Home() {
-  await dbConnect()
   return (
-    <div>
+    <main className="min-h-screen">
       <h1>Hello World</h1>
-    </div>
+    </main>
   );
 }
