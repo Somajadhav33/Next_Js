@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
+import connectDb from "@/lib/db";
 
-export default function Home() {
+export default async function Home() {
+  await connectDb();
   return (
     <div>
       <Button>Add</Button>
