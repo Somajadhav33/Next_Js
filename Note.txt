@@ -50,3 +50,22 @@ http headers - metadata(send with every http request and response)  - 1. request
 cookies - 
 
 lean()
+
+notFound()
+useParams()
+usePathname()
+useQueryParams()
+useSearchParams()
+useRouter() - push , replace, 
+redirect()
+
+server action - server side functions without creating any routes
+
+
+metadata - 
+static open graph images -
+dynamic open graph images -
+
+state mgmt & data fetching
+    tenstack query
+
