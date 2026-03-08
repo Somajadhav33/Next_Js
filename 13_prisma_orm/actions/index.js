@@ -12,3 +12,24 @@ export const seedDb = async () => {
   });
   console.log("Seed Successfull");
 };
+
+export const createPost = async (formdata) => {
+  const title = formdata.get("title");
+  const description = formdata.get("description");
+  const post = await prisma.post.create({
+    data: {
+      title: title,
+      description: description,
+    },
+  });
+  console.log("Data inserted");
+  return {
+    success: true,
+    data: post,
+  };
+};
+
+export const getPost = async () => {
+  const posts = await prisma.post.findMany();
+  return posts;
+};
