@@ -11,5 +11,13 @@ export async function CreateTodo(data) {
     await connectDb();
     const todo = await TodoSchema.create(validateData);
     revalidatePath("/");
-  } catch (e) {}
+    return {
+      success: true,
+      data: JSON.parse(JSON.stringify(todo)),
+    };
+  } catch (e) {
+    return{
+      success:false
+    }
+  }
 }
