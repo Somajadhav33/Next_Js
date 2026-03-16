@@ -9,7 +9,8 @@ import { toast } from "sonner";
 import { authClient } from "@/lib/auth-client";
 
 const PolarComponent = ({ isPro }) => {
-  const { data: user } = authClient.useSession();
+  const { data } = authClient.useSession();
+  const user = data?.user;
 
   const getInitials = (name) => {
     if (!name) return "??";
@@ -51,16 +52,16 @@ const PolarComponent = ({ isPro }) => {
         <CardHeader className="pb-4 space-y-6">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div className="flex items-center gap-4">
-              <Avatar className="w-16 h-16 sm:w-20 sm:h-20">
-                <AvatarFallback className="text-lg sm:text-xl font-semibold">
-                  {getInitials(user?.user.name)}
+              <Avatar className="w-16 h-16 sm:w-20 sm:h-20 bg-muted">
+                <AvatarFallback className="text-lg sm:text-xl font-semibold bg-white text-black border">
+                  {getInitials(user?.name)}
                 </AvatarFallback>
               </Avatar>
               <div className="space-y-1">
-                <h3 className="text-xl font-semibold tracking-tight">
+                <h3 className="text-xl font-semibold tracking-tight text-black">
                   {user?.name || "User"}
                 </h3>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-black">
                   {user?.email || "user@example.com"}
                 </p>
                 <Badge
@@ -81,11 +82,11 @@ const PolarComponent = ({ isPro }) => {
           </div>
         </CardHeader>
 
-        <CardContent className="pt-6 border-t bg-secondary/5">
+        <CardContent className="pt-6 border-t bg-white">
           <div className="flex flex-col sm:flex-row gap-4">
             <Button
               onClick={handleTrackUsage}
-              className="flex-1 gap-2 bg-lime-500 hover:bg-lime-600"
+              className="flex-1 gap-2 bg-white text-black border border-gray-300 hover:bg-gray-100"
               size="lg"
             >
               <Zap className="w-5 h-5" />
@@ -95,7 +96,7 @@ const PolarComponent = ({ isPro }) => {
             {!isPro ? (
               <Button
                 onClick={handleCheckout}
-                className="flex-1 gap-2 bg-lime-500 hover:bg-lime-600"
+                className="flex-1 gap-2 bg-black text-white hover:bg-gray-800"
                 size="lg"
               >
                 <Crown className="w-5 h-5" />
@@ -104,7 +105,7 @@ const PolarComponent = ({ isPro }) => {
             ) : (
               <Button
                 onClick={handleManageSubscription}
-                className="flex-1 gap-2 bg-lime-500 hover:bg-lime-600"
+                className="flex-1 gap-2 bg-black text-white hover:bg-gray-800"
                 size="lg"
               >
                 <ExternalLink className="w-5 h-5" />
@@ -115,7 +116,7 @@ const PolarComponent = ({ isPro }) => {
 
           {!isPro && (
             <div className="mt-6 p-4 bg-secondary/10 rounded-lg">
-              <p className="text-sm text-center text-muted-foreground">
+              <p className="text-sm text-center text-black">
                 Upgrade to Pro to unlock premium features
               </p>
             </div>

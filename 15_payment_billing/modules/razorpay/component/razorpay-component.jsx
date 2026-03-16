@@ -8,7 +8,7 @@ import { authClient } from "@/lib/auth-client";
 export default function RazorpayComponent({ currentPlan }) {
   const [loading, setLoading] = useState(false);
   const { data } = authClient.useSession();
-  const { user } = data;
+  const user = data?.user;
   const handlePayment = async () => {
     try {
       setLoading(true);
@@ -87,7 +87,7 @@ export default function RazorpayComponent({ currentPlan }) {
         <Button
           onClick={handlePayment}
           disabled={loading}
-          className="bg-blue-500 hover:bg-blue-600"
+          className="bg-black text-white hover:bg-gray-800"
         >
           {loading ? "Processing..." : "Upgrade to Pro (₹999)"}
         </Button>

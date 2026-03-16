@@ -53,16 +53,16 @@ const StripeComponent = ({ plan }) => {
         <CardHeader className="pb-4 space-y-6">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div className="flex items-center gap-4">
-              <Avatar className="w-16 h-16 sm:w-20 sm:h-20 border-2 border-indigo-500">
-                <AvatarFallback className="bg-primary/10 text-primary text-lg sm:text-xl font-semibold">
+              <Avatar className="w-16 h-16 sm:w-20 sm:h-20 border border-gray-300">
+                <AvatarFallback className="bg-white text-black text-lg sm:text-xl font-semibold">
                   {getInitials(user?.name)}
                 </AvatarFallback>
               </Avatar>
               <div className="space-y-1">
-                <h3 className="text-xl font-semibold tracking-tight">
+                <h3 className="text-xl font-semibold tracking-tight text-black">
                   {user?.name || "User"}
                 </h3>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-black">
                   {user?.email || "user@example.com"}
                 </p>
                 <Badge
@@ -83,12 +83,11 @@ const StripeComponent = ({ plan }) => {
           </div>
         </CardHeader>
 
-        <CardContent className="pt-6 border-t bg-secondary/5">
+        <CardContent className="pt-6 border-t bg-white">
           <div className="flex flex-col sm:flex-row gap-4">
             <Button
               onClick={onProAction}
-              className="flex-1 gap-2"
-              variant={isPro ? "outline" : "secondary"}
+              className="flex-1 gap-2 bg-white text-black border border-gray-300 hover:bg-gray-100"
               size="lg"
               disabled={isUpgrading}
             >
@@ -99,7 +98,7 @@ const StripeComponent = ({ plan }) => {
             {!isPro && (
               <Button
                 onClick={onUpragde}
-                className="flex-1 gap-2 bg-indigo-500 hover:bg-indigo-600"
+                className="flex-1 gap-2 bg-black text-white hover:bg-gray-800"
                 size="lg"
                 disabled={isUpgrading}
               >
@@ -119,16 +118,16 @@ const StripeComponent = ({ plan }) => {
           </div>
 
           {!isPro && (
-            <div className="mt-6 p-4 bg-secondary/10 rounded-lg">
-              <p className="text-sm text-center text-muted-foreground">
+            <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+              <p className="text-sm text-center text-black">
                 Upgrade to Pro for just $9.99/month to unlock premium features
               </p>
             </div>
           )}
 
           {isPro && (
-            <div className="mt-6 p-4 bg-indigo-500/10 rounded-lg border border-indigo-500/20">
-              <p className="text-sm text-center text-indigo-600 dark:text-indigo-400 font-medium">
+            <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+              <p className="text-sm text-center text-black font-medium">
                 🎉 You have full access to all premium features!
               </p>
             </div>

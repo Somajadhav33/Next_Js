@@ -35,11 +35,11 @@ export default async function Home({ searchParams }) {
         canceled={canceled === "true"}
       />
 
-      <Tabs defaultValue="stripe">
-        <TabsList>
-          <TabsTrigger value="stripe">Stripe🟣</TabsTrigger>
-          <TabsTrigger value="polar">Polar🟢</TabsTrigger>
-          <TabsTrigger value="razorpay">Razorpay🔵</TabsTrigger>
+      <Tabs defaultValue="stripe" className="w-full max-w-2xl mx-auto">
+        <TabsList className="grid w-full grid-cols-3 bg-gray-100 p-1 rounded-lg">
+          <TabsTrigger value="stripe" className="data-[state=active]:bg-white data-[state=active]:text-black rounded-md transition-all">Stripe</TabsTrigger>
+          <TabsTrigger value="polar" className="data-[state=active]:bg-white data-[state=active]:text-black rounded-md transition-all">Polar</TabsTrigger>
+          <TabsTrigger value="razorpay" className="data-[state=active]:bg-white data-[state=active]:text-black rounded-md transition-all">Razorpay</TabsTrigger>
         </TabsList>
         <TabsContent value="stripe">
           <StripeComponent plan={user?.plan} />
@@ -51,7 +51,9 @@ export default async function Home({ searchParams }) {
           <RazorpayComponent currentPlan={razorpayPlan} />
         </TabsContent>
       </Tabs>
-      <LogoutButton />
+      <div className="mt-8">
+        <LogoutButton />
+      </div>
     </main>
   );
 }
