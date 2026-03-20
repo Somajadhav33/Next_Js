@@ -84,4 +84,5 @@ export const getCurrentUser = async () => {
       id: true,
     },
   });
+  return dbUser;
 };

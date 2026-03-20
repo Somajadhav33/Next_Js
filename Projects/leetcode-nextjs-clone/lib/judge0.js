@@ -1,5 +1,7 @@
 import axios from "axios";
 
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 export function getJudge0LanguageId(language) {
   const languageMap = {
     PYTHON: 71,
@@ -18,6 +20,7 @@ export async function submitBatch(submissions) {
   );
 
   console.log("batch response", data);
+  return data; // ✅ was missing
 }
 
 export async function pollBatchResults(tokens) {

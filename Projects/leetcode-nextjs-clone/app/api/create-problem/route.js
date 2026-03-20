@@ -13,6 +13,9 @@ export async function POST(request) {
   try {
     const userRole = await curruntUserRole();
     const user = await getCurrentUser();
+    if (!user) {
+      return NextResponse.json({ error: "User not found" }, { status: 401 });
+    }
 
     if (userRole !== UserRole.ADMIN) {
       return NextResponse.json(
@@ -71,7 +74,7 @@ export async function POST(request) {
 
     for (const [language, solutionCode] of Object.entries(referenceSolutions)) {
       //Judge000
-      const languageId = getJudge0LanguageId();
+      const languageId = getJudge0LanguageId(language);
       if (!languageId) {
         return ({ error: "Unsupported language" }, { status: 404 });
       }
