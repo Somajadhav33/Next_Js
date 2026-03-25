@@ -1,7 +1,6 @@
 import { db } from "@/lib/db";
 import { UserRole } from "@/lib/generated/prisma/enums";
 import { currentUser } from "@clerk/nextjs/server";
-import { revalidatePath } from "next/cache";
 
 export const getAllProblems = async () => {
   try {
