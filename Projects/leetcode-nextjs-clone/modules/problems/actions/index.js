@@ -1,3 +1,5 @@
+"use server";
+
 import { db } from "@/lib/db";
 import { UserRole } from "@/lib/generated/prisma/enums";
 import { currentUser } from "@clerk/nextjs/server";
