@@ -47,6 +47,8 @@ import { getJudge0LanguageId } from "@/lib/judge0";
 import { toast } from "sonner";
 // import { SubmissionHistory } from '@/modules/problems/components/submission-history';
 import Link from "next/link";
+import { SubmissionDetails } from "@/modules/problems/components/submission-details";
+import { TestCaseTable } from "@/modules/problems/components/test-case-table";
 
 const getDifficultyColor = (difficulty) => {
   switch (difficulty) {
@@ -60,9 +62,6 @@ const getDifficultyColor = (difficulty) => {
       return "bg-gray-100 text-gray-800 border-gray-200";
   }
 };
-
-const handleSubmit = () => {};
-const handleRun = () => {};
 
 const ProblemIdPage = ({ params }) => {
   const [problem, setProblem] = useState(null);
@@ -91,6 +90,7 @@ const ProblemIdPage = ({ params }) => {
     };
 
     fetchProblem();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
 
   useEffect(() => {
@@ -99,6 +99,33 @@ const ProblemIdPage = ({ params }) => {
       setCode(problem.codeSnippets[selectedLanguage]);
     }
   }, [selectedLanguage, problem]);
+
+  const handleRun = async () => {
+    try {
+      setIsRunning(true);
+      const language_id = getJudge0LanguageId(selectedLanguage);
+      const stdin = problem.testCases.map((tc) => tc.input);
+      const expected_outputs = problem.testCases.map((tc) => tc.output);
+      const res = await executeCode(
+        code,
+        language_id,
+        stdin,
+        expected_outputs,
+        problem.id,
+      );
+      setExecutionResponse(res);
+      if (res.success) {
+        toast.success("Code executed successfully");
+      }
+    } catch (error) {
+      console.log("Error executing code", error);
+      toast.error("Error executing code");
+    } finally {
+      setIsRunning(false);
+    }
+  };
+
+  const handleSubmit = () => {};
 
   return (
     <div>
@@ -319,7 +346,7 @@ const ProblemIdPage = ({ params }) => {
               <CardContent>
                 <ScrollArea className="h-48">
                   <div className="space-y-4">
-                    {problem.testCases.map((testCase, index) => (
+                    {problem?.testCases?.map((testCase, index) => (
                       <div key={index} className="border rounded-lg p-3">
                         <div className="text-sm font-medium mb-2">
                           Test Case {index + 1}
@@ -348,6 +375,15 @@ const ProblemIdPage = ({ params }) => {
                 </ScrollArea>
               </CardContent>
             </Card>
+            {/* Test Results and Submission Details */}
+            {executionResponse && executionResponse.submission && (
+              <div className="space-y-4 mt-4">
+                <SubmissionDetails submission={executionResponse.submission} />
+                <TestCaseTable
+                  testCases={executionResponse.submission.testCases}
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>
