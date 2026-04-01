@@ -49,6 +49,7 @@ import { toast } from "sonner";
 import Link from "next/link";
 import { SubmissionDetails } from "@/modules/problems/components/submission-details";
 import { TestCaseTable } from "@/modules/problems/components/test-case-table";
+import { SubmissionHistory } from "@/modules/problems/components/submission-history";
 
 const getDifficultyColor = (difficulty) => {
   switch (difficulty) {
@@ -99,6 +100,24 @@ const ProblemIdPage = ({ params }) => {
       setCode(problem.codeSnippets[selectedLanguage]);
     }
   }, [selectedLanguage, problem]);
+
+  useEffect(() => {
+    const fetchSubmissionHistory = async () => {
+      try {
+        const resolvedParams = await params;
+        const submissionHistory = await getAllSubmissionByCurrentUserForProblem(
+          resolvedParams.id,
+        );
+        console.log(submissionHistory);
+        if (submissionHistory.success) {
+          setSubmissionHistory(submissionHistory.data);
+        }
+      } catch (error) {
+        console.error("Error fetching problem:", error);
+      }
+    };
+    fetchSubmissionHistory();
+  }, [params]);
 
   const handleRun = async () => {
     try {
@@ -245,7 +264,7 @@ const ProblemIdPage = ({ params }) => {
                   </TabsList>
                   <TabsContent value="submissions" className="p-6">
                     <div className="text-center py-8 text-muted-foreground">
-                      {/* <SubmissionHistory submissions={submissionHistory} /> */}
+                      <SubmissionHistory submissions={submissionHistory} />
                     </div>
                   </TabsContent>
                   <TabsContent value="editorial" className="p-6">
