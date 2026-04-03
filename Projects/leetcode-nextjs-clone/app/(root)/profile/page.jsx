@@ -9,9 +9,9 @@ import React from "react";
 const ProfilePage = async () => {
   const profileData = await getCurrentUserData();
 
-  console.log(profileData);
+  // console.log(profileData);
   return (
-    <div className="min-h-screen  py-32">
+    <div className="min-h-screen max-h-fit py-32">
       <div className="container mx-auto px-4 max-w-7xl">
         <UserInfoCard userData={profileData} />
 

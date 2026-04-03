@@ -19,8 +19,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-// import { TestCaseTable } from "@/modules/problems/components/test-case-table";
-// import { SubmissionDetails } from "@/modules/problems/components/submission-details";
 import {
   Select,
   SelectContent,
@@ -45,7 +43,6 @@ import { cn } from "@/lib/utils";
 import { ModeToggle } from "@/components/ui/mode-toggle";
 import { getJudge0LanguageId } from "@/lib/judge0";
 import { toast } from "sonner";
-// import { SubmissionHistory } from '@/modules/problems/components/submission-history';
 import Link from "next/link";
 import { SubmissionDetails } from "@/modules/problems/components/submission-details";
 import { TestCaseTable } from "@/modules/problems/components/test-case-table";
@@ -80,7 +77,6 @@ const ProblemIdPage = ({ params }) => {
       try {
         const resolvedParams = await params;
         const problemData = await getProblemById(resolvedParams.id);
-        console.log(problemData);
         if (problemData.success) {
           setProblem(problemData.data);
           setCode(problemData.data.codeSnippets[selectedLanguage] || "");
@@ -108,7 +104,7 @@ const ProblemIdPage = ({ params }) => {
         const submissionHistory = await getAllSubmissionByCurrentUserForProblem(
           resolvedParams.id,
         );
-        console.log(submissionHistory);
+        // console.log(submissionHistory);
         if (submissionHistory.success) {
           setSubmissionHistory(submissionHistory.data);
         }
@@ -268,18 +264,20 @@ const ProblemIdPage = ({ params }) => {
                     </div>
                   </TabsContent>
                   <TabsContent value="editorial" className="p-6">
-                    {/* <div className="text-center py-8 text-muted-foreground">
-                      {problem.editorial
+                    <div className="text-center py-8 text-muted-foreground">
+                      {problem?.editorial
                         ? problem.editorial
                         : "Editorial not available yet."}
-                    </div> */}
+                    </div>
                   </TabsContent>
                   <TabsContent value="hints" className="p-6">
-                    {/* <div className="text-center py-8 text-muted-foreground">
-                      {problem.hints
-                        ? problem.hints
-                        : "No hints available for this problem."}
-                    </div> */}
+                    <div className="text-center py-8 text-muted-foreground">
+                      {problem?.hints ? (
+                        <p>{problem.hints}</p>
+                      ) : (
+                        "No hints available for this problem."
+                      )}
+                    </div>
                   </TabsContent>
                 </Tabs>
               </CardContent>

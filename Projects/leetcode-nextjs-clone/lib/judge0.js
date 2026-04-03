@@ -29,8 +29,8 @@ export async function submitBatch(submissions) {
     { submissions },
   );
 
-  console.log("batch response", data);
-  return data; // ✅ was missing
+  // console.log("batch response", data);
+  return data;
 }
 
 export async function pollBatchResults(tokens) {
@@ -44,7 +44,7 @@ export async function pollBatchResults(tokens) {
         },
       },
     );
-    console.log(data);
+    // console.log(data);
     const results = data.submissions;
     const isAllDone = results.every(
       (r) => r.status.id !== 1 && r.status.id !== 2,
@@ -54,3 +54,41 @@ export async function pollBatchResults(tokens) {
     await sleep(1000);
   }
 }
+
+// export async function submitBatch(submissions) {
+//   const { data } = await axios.post(
+//     `https://judge0-extra-ce.p.rapidapi.com/submissions/batch?base64_encoded=false`,
+//     { submissions },
+//     {
+//       headers: {
+//         "x-rapidapi-host": "judge0-extra-ce.p.rapidapi.com",
+//         "x-rapidapi-key": process.env.JUDGE0_API_KEY,
+//       },
+//     },
+//   );
+//   return data;
+// }
+
+// export async function pollBatchResults(tokens) {
+//   while (true) {
+//     const { data } = await axios.get(
+//       `https://judge0-extra-ce.p.rapidapi.com/submissions/batch`,
+//       {
+//         params: {
+//           tokens: tokens.join(","),
+//           base64_encoded: false,
+//         },
+//         headers: {
+//           "x-rapidapi-host": "judge0-extra-ce.p.rapidapi.com",
+//           "x-rapidapi-key": process.env.JUDGE0_API_KEY,
+//         },
+//       },
+//     );
+//     const results = data.submissions;
+//     const isAllDone = results.every(
+//       (r) => r.status.id !== 1 && r.status.id !== 2,
+//     );
+//     if (isAllDone) return results;
+//     await sleep(1000);
+//   }
+// }

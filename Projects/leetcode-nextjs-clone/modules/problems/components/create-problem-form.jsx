@@ -545,14 +545,14 @@ const CreateProblemForm = () => {
   const onSubmit = async (values) => {
     try {
       setIsLoading(true);
-      console.log("Form values:", values);
+      // console.log("Form values:", values);
 
       const response = await fetch("/api/create-problem", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),
       });
-      console.log("API response:", response);
+      // console.log("API response:", response);
       toast.success(response.message || "Problem created successfully");
       router.push("/problems");
     } catch (error) {

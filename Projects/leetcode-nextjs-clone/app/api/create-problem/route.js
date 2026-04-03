@@ -31,6 +31,7 @@ export async function POST(request) {
       description,
       difficulty,
       tags,
+      hints,
       examples,
       constraints,
       testCases,
@@ -92,14 +93,14 @@ export async function POST(request) {
 
       for (let i = 0; i < results.length; i++) {
         const result = results[i];
-        console.log(`Test case ${i + 1} details:`, {
-          input: submissions[i].stdin,
-          expectedOutput: submissions[i].expected_output,
-          actualOutput: result.stdout,
-          status: result.status,
-          language: language,
-          error: result.stderr || result.compile_output,
-        });
+        // console.log(`Test case ${i + 1} details:`, {
+        //   input: submissions[i].stdin,
+        //   expectedOutput: submissions[i].expected_output,
+        //   actualOutput: result.stdout,
+        //   status: result.status,
+        //   language: language,
+        //   error: result.stderr || result.compile_output,
+        // });
         if (result.status.id !== 3) {
           return NextResponse.json(
             {
@@ -124,6 +125,7 @@ export async function POST(request) {
         description,
         difficulty,
         tags,
+        hints: hints || null,
         examples,
         constraints,
         testCases,
