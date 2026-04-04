@@ -6,7 +6,6 @@ import {
   submitBatch,
 } from "@/lib/judge0";
 import { curruntUserRole, getCurrentUser } from "@/modules/auth/actions";
-import axios from "axios";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
@@ -32,6 +31,7 @@ export async function POST(request) {
       difficulty,
       tags,
       hints,
+      editorial,
       examples,
       constraints,
       testCases,
@@ -126,6 +126,7 @@ export async function POST(request) {
         difficulty,
         tags,
         hints: hints || null,
+        editorial: editorial || null,
         examples,
         constraints,
         testCases,

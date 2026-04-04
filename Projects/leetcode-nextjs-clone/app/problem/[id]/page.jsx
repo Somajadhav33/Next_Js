@@ -1,5 +1,4 @@
 "use client";
-"use client";
 
 import { useTheme } from "next-themes";
 import Editor from "@monaco-editor/react";
@@ -63,6 +62,7 @@ const getDifficultyColor = (difficulty) => {
 
 const ProblemIdPage = ({ params }) => {
   const [problem, setProblem] = useState(null);
+  const [reload, setReload] = useState(0);
   const [selectedLanguage, setSelectedLanguage] = useState("JAVASCRIPT");
   const [code, setCode] = useState("");
   const [output, setOutput] = useState("");
@@ -113,7 +113,7 @@ const ProblemIdPage = ({ params }) => {
       }
     };
     fetchSubmissionHistory();
-  }, [params]);
+  }, [params, reload]);
 
   const handleRun = async () => {
     try {
@@ -132,6 +132,7 @@ const ProblemIdPage = ({ params }) => {
       if (res.success) {
         toast.success("Code executed successfully");
       }
+      setReload(reload + 1);
     } catch (error) {
       console.log("Error executing code", error);
       toast.error("Error executing code");
