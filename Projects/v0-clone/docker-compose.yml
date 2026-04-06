@@ -1,0 +1,10 @@
+name: v0-clone
+services:
+  db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=v0-clone
+    ports:
+      - 5431:5432
