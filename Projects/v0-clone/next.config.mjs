@@ -5,7 +5,7 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "img.clerk.com",
-        pathname: "/**", // THIS is what you're missing
+        pathname: "/**", 
       },
     ],
   },
